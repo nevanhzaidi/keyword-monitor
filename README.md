@@ -27,7 +27,7 @@ This project is a mock social media monitoring tool designed to simulate keyword
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/keyword-monitor.git
+   git clone https://[TOKEN]@github.com/[your-user-name]/keywork-monitor.git
    cd keyword-monitor
 2. Install dependencies:
 
@@ -45,7 +45,7 @@ This project is a mock social media monitoring tool designed to simulate keyword
 
 ## Testing
 ```bash
-  npm run dev
+  npm run test
   ```
 
 ## Run server
