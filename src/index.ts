@@ -11,7 +11,6 @@ import logRoutes from './routes/logRoutes';
 import { startGeneratingPosts } from './data/generatePosts';
 import { secrets } from './utils/secrets';
 
-
 // Initialize the Express app
 const app = express();
 

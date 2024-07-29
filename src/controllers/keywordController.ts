@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { sendResponse } from '../utils/helpers';
 import { keywordsSet } from '../data/store';
 
-
 // Adds a new keyword to the keywordsSet.
 export const addKeyword = (req: Request, res: Response) => {
   const { keyword } = req.body;
@@ -24,5 +23,3 @@ export const addKeyword = (req: Request, res: Response) => {
 export const listKeywords = (req: Request, res: Response) => {
   return res.json(Object.keys(keywordsSet));
 };
-
-export { keywordsSet };

@@ -39,6 +39,8 @@ This project is a mock social media monitoring tool designed to simulate keyword
    ```bash
     USERNAME=admin
     PASSWORD=password123
+    JWT_SECRET=your_secret_key_here
+    PORT=3000
   ```
 
 ## Testing
@@ -67,7 +69,7 @@ Request body:
 Successful response:
    ```bash
   {
-    "token": "Basic YWRtaW46cGFzc3dvcmQxM...."
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...."
   }
   ```
 

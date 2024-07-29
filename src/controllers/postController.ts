@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
-import { keywordsSet } from './keywordController';
 import { matchesKeyword, sendResponse } from '../utils/helpers';
-import { posts } from '../data/store';
+import { keywordsSet, posts } from '../data/store';
 import { VALID_PLATFORMS } from '../utils/constants';
 
 // GET /api/posts?platform={platform}&startDate={startDate}&endDate={endDate}
-
 export const listPosts = (req: Request, res: Response) => {
   // Get query parameters
   const { platform, startDate, endDate } = req.query as {
@@ -40,10 +38,10 @@ export const listPosts = (req: Request, res: Response) => {
   const filteredPosts = posts.filter(post => {
     const postDate = new Date(post.timestamp);
     return (
-      matchesKeyword(post.content, keywordsSet) &&
       (!platform || post.platform === platform) &&
       (!start || postDate >= start) &&
-      (!end || postDate <= end)
+      (!end || postDate <= end) &&
+      matchesKeyword(post.content, keywordsSet)
     );
   });
 
@@ -57,9 +55,13 @@ export const listUpdates = (req: Request, res: Response) => {
   const newPostIndex = posts.findIndex((post, index) => index >= lastCheckedIndex);
 
   if (newPostIndex !== -1) {
+    // Get new posts since the last check
     const newPosts = posts.slice(newPostIndex);
+    // Filter posts by keywords
+    const keywordFilteredPosts = newPosts.filter(post => matchesKeyword(post.content, keywordsSet));
+    // Update lastCheckedIndex
     lastCheckedIndex = posts.length;
-    sendResponse(res, 200, newPosts);
+    sendResponse(res, 200, keywordFilteredPosts);
   } else {
     sendResponse(res, 200, []);
   }
